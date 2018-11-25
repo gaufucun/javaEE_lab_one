@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+ 
+<struts>
+ 
+  
+
+  <package name="basicstruts" extends="struts-default">
+  		<interceptors>
+  			<interceptor name="checkLogin" class="javaEE_lab_11.CheckLoginInterceptor"></interceptor>
+	  			
+  		</interceptors>
+  		
+  		
+  		<global-results>
+  		 <result name="login">login.jsp</result>
+  		</global-results>
+
+	  <action name="showInfo" class="javaEE_lab_11.StudentAction" method="show">
+	    <result name="show">index.jsp</result>
+	  </action>   
+	 
+	 <action name="findInfo" class="javaEE_lab_11.StudentAction" method="find">
+	    <result name="show">index.jsp</result>
+	    
+	 </action>
+	 
+	 <action name="downloadInfo" class="javaEE_lab_11.downloadInfo" >
+	    <result type="stream">
+	 	<!--修改获取下载文件数据的方法对应的属性和名称  -->
+	 	     <param name="inputName">inputStream</param>
+	 	     
+	 	     <!--指定浏览器以下载的方式打开浏览器  -->
+	 	     <param name="contentDisposition">attachment;filename=${filename}</param>
+	 	</result>
+	    
+	 </action>
+	 
+	 
+	 <action name="login" class="javaEE_lab_11.LoginAction" >
+	    <result name="input">login.jsp</result>
+	    <result name="success" type="redirectAction">main</result>
+	 </action>
+	 
+	 <action name="main">
+	     <interceptor-ref name="checkLogin"/>
+	 	<result>index.jsp</result>
+	 </action> 
+	 
+	  <action name="upload" class="javaEE_lab_11.UploadAcion">
+            
+           
+      </action>
+
+	 
+	  <action name="download" class="javaEE_lab_11.DownLoadAction">
+	     
+	 	<result type="stream">
+	 	<!--修改获取下载文件数据的方法对应的属性和名称  -->
+	 	     <param name="inputName">inputStream</param>
+	 	     
+	 	     <!--指定浏览器以下载的方式打开浏览器  -->
+	 	     <param name="contentDisposition">attachment;filename=${filename}</param>
+	 	</result>
+	 </action>
+	 
+	 
+	 
+	 
+</package>
+ 
+</struts>
